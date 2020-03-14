@@ -4,17 +4,18 @@ from objects import Elevator
 
 tk = Tk()
 
-height = 1000
-width = 800
+width = 1000
+height = 800
+
 
 canvas = Canvas(tk, width = width, height = height)
 tk.title("Lift Simulation")
 canvas.pack()
 
-e = Elevator(10, 1000, 100, canvas)
+e = Elevator(10, 100, 100, canvas)
 
 speed = 1
 while True:
-    
+    e.update()
     tk.update()
     time.sleep(0.1)
