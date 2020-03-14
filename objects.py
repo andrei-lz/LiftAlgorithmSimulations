@@ -6,14 +6,18 @@ class Lift:
         self.height = height
         self.posX = posX
         self.posY = posY
+        print(height, width)
         self.speed = speed
+        self.currentStorey = 111
         self.shape = canvas.create_rectangle(self.posX, self.posY, self.width, self.height, fill = "black")
 
-    def moveUp(self):
+    def move_up(self):
         currentPos = self.canvas.coords(self.shape)
         self.canvas.move(self.shape, 0, -self.speed)
 
-    def moveDown(self, xDest: int, yDest: int):
+    def move_down(self, storeys: int):
+        yDest = ((storeys - 1) * self.height) + self.posX
+        print("destination", yDest)
         currentPos = self.canvas.coords(self.shape)
         if (currentPos[3] != yDest):
             self.canvas.move(self.shape, 0, self.speed)
@@ -29,10 +33,9 @@ class ElevatorShaft:
                 self.scale = value
         
         self.liftsize = 100 * self.scale
-        print(self.liftsize)
         self.width = self.liftsize
         self.height = self.liftsize * storeys
         self.canvas = canvas
         
-        self.lift = Lift(self.liftsize, self.liftsize, posX + self.liftsize, posY +self.liftsize, 1, self.canvas)
+        self.lift = Lift(posY, posY, posX + self.liftsize, posY +self.liftsize, 1, self.canvas)
         self.lift.canvas.create_rectangle(posX, posY, posX + self.width, posX + self.height)
