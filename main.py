@@ -22,6 +22,11 @@ def main():
     while True:
         e_m.update()
 
+        for floor in requests_generated:
+            for person in floor:
+                print(person)
+
+
         tk.update()
         time.sleep(0.1)
 
