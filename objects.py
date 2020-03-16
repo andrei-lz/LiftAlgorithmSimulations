@@ -13,11 +13,13 @@ class Elevator:
         self.canvas = canvas
     
     def update(self):
+        for i in range(0, len(self.storey_array)):
+            self.canvas.itemconfig(self.storey_array[i], fill = "gray")
         self.canvas.itemconfig(self.storey_array[self.storeys - 1 - self.lift.current_floor], fill="yellow")
 
 class Lift:
 
     def __init__(self):
         self.capacity = 5
-        self.current_floor = 3
+        self.current_floor = 0
     
