@@ -25,6 +25,7 @@ def main():
         for floor in requests_generated:
             for person in floor:
                 print(person)
+            print("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
 
 
         tk.update()
