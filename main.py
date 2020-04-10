@@ -22,10 +22,10 @@ def main():
     while True:
         e_m.update()
 
-        for floor in requests_generated:
-            for person in floor:
-                print(person)
-            print("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+        # Draw the requests for each floor
+        for index in range(0, len(requests_generated)):
+            person_count = Label(tk, text=len(requests_generated[index]), font=("Helvetica", 16), justify=LEFT)
+            person_count.place(x=e_m.posX, y=100+50*index)
 
 
         tk.update()
