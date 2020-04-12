@@ -1,3 +1,7 @@
+'''
+Neeeded objects for the main module
+'''
+
 import tkinter as tk
 
 class Elevator:
