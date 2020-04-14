@@ -1,7 +1,8 @@
 '''
+Simulation to compare times of two different elevator algorithms
 '''
 
-from tkinter import *
+from tkinter import Tk, Canvas, Label, LEFT
 import time
 from objects import Elevator
 
@@ -13,7 +14,7 @@ def main():
     '''
     tk = Tk()
 
-    width = 1000
+    width = 1366
     height = 800
 
 
@@ -27,13 +28,13 @@ def main():
     e_m = Elevator(10, 100, 100, canvas)
     e_m.lift.vel = 1
     drawFloors(tk, e_m)
-    e_m_title = Label(tk, text="Base Case Algorithm", font=("Impact",24), justify=LEFT)
+    e_m_title = Label(tk, text="Base Case Algorithm", font=("Impact", 24), justify=LEFT)
     e_m_title.place(x=e_m.posX, y=e_m.posY-e_m.height-25)
 
     e_f = Elevator(10, 500, 100, canvas)
     e_f.lift.vel = 1
     drawFloors(tk, e_f)
-    e_f_title = Label(tk, text="Improved Algorithm", font=("Impact",24), justify=LEFT)
+    e_f_title = Label(tk, text="Improved Algorithm", font=("Impact", 24), justify=LEFT)
     e_f_title.place(x=e_f.posX, y=e_f.posY-e_f.height-25)
 
     while True:
@@ -66,9 +67,6 @@ def drawFloors(tk: Tk, e: Elevator) -> None:
         offY = e.posY + e.height*(floor-1)
         l = Label(tk, text="Floor "+str(floors + 1 - floor), font=("Helvetica", 18), justify=LEFT)
         l.place(x=offX, y=offY)
-
-
-
 
 if __name__ == "__main__":
     main()

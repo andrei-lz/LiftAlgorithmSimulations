@@ -17,6 +17,9 @@ class Elevator:
         self.canvas = canvas
     
     def update(self):
+        '''
+        Called every tick, updates lift position
+        '''
         for i in range(0, len(self.storey_array)):
             self.canvas.itemconfig(self.storey_array[i], fill = "gray")
         self.canvas.itemconfig(self.storey_array[self.lift.current_floor], fill="yellow")
@@ -26,3 +29,12 @@ class Lift:
     def __init__(self):
         self.capacity = 5
         self.current_floor = 0
+        self.passengers = []
+    
+    def addPassenger(self, passenger: int) -> None:
+        self.passengers.append(passenger)
+        self.capacity -= 1
+    
+    def removePassenger(self, passenger: int) -> None:
+        self.passengers.remove(passenger)
+        self.capacity += 1
