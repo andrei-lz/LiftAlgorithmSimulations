@@ -1,2 +1,2 @@
 # LiftAlgorithmSimulations
- Efficiency comparison of two different elevator algorithms 
+ Efficiency comparison of two different algorithms for conventional lifts in apartment buildings (distinct from elevator algorithms)
