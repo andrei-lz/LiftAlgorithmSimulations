@@ -37,7 +37,7 @@ def main():
     e_m_title = Label(tk, text="Base Case Algorithm", font=("Impact", 24), justify=LEFT)
     e_m_title.place(x=e_m.posX, y=e_m.posY-e_m.height-25)
     e_m_TOTAL_TIME = 0
-    e_m_REQUESTS = [[1], [9], [5, 2],[9,2,3,2,1],[],[],[],[],[],[]]
+    e_m_REQUESTS = [[1], [5], [5, 2],[5,2,3,2,1],[],[],[],[],[],[]]
     e_m_requests_left = 0
     for index in e_m_REQUESTS:
         e_m_requests_left += len(index)
@@ -49,7 +49,7 @@ def main():
     e_f_title = Label(tk, text="Improved Algorithm", font=("Impact", 24), justify=LEFT)
     e_f_title.place(x=e_f.posX, y=e_f.posY-e_f.height-25)
     e_f_TOTAL_TIME = 0
-    e_f_REQUESTS = [[1], [9], [5, 2],[9,2,3,2,1],[],[],[],[],[],[]]
+    e_f_REQUESTS = [[1], [5], [5, 2],[5,2,3,2,1],[],[],[],[],[],[]]
     e_f_requests_left = 0
     for index in e_f_REQUESTS:
         e_f_requests_left += len(index)
@@ -140,8 +140,7 @@ def main():
             # Move the elevator closer to the next destination
             # If the elevator is empty, go for requests
             if e_f.lift.capacity >= 5:
-                # requests
-                print("re")
+                e_f.lift.current_floor += 1
             # Otherwise go for passenger destinations
             else:
                 if (e_f.lift.passengers[0] - e_f.lift.current_floor) < 0:
