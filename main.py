@@ -75,7 +75,7 @@ def main():
             elif e_m.lift.current_floor == 0:
                 e_m.lift.direction = "DOWN"
                 
-            # Board Passengers
+            # Boarding Passengers
             if len(e_m_REQUESTS[e_m.lift.current_floor]) > 0:
                 print(e_m_REQUESTS[e_m.lift.current_floor])
                 for passenger in e_m_REQUESTS[e_m.lift.current_floor][:]:
