@@ -6,7 +6,9 @@ import tkinter as tk
 
 
 class Elevator:
-
+    '''
+    Represents a full elevator system object
+    '''
     def __init__(self, storeys: int, posX: int, posY: int, canvas):
         self.storeys = storeys
         self.posX = posX
@@ -39,7 +41,9 @@ class Elevator:
 
 
 class Lift:
-
+    '''
+    Represents the lift part that moves up and down in an elevator shaft
+    '''
     def __init__(self):
         self.capacity = 5
         self.current_floor = 0
