@@ -56,3 +56,13 @@ class Lift:
     def removePassenger(self, passenger: int) -> None:
         self.passengers.remove(passenger)
         self.capacity += 1
+    
+    def goTo(self, target: int):
+        if target > self.current_floor:
+            self.current_floor += 1
+            print("Moving down")
+        elif target < self.current_floor:
+            self.current_floor -= 1
+            print("Moving up")
+        else:
+            return
