@@ -28,8 +28,6 @@ def main():
     tk.title("Lift Simulation")
     canvas.pack()
 
-    requests_generated = [[1], [9], [5, 2],[9,2,3,2,1],[],[],[],[],[],[]]
-
     # Mechanical Elevator Implementation
     e_m = Elevator(12, 100, 100, canvas)
     e_m.lift.vel = 1
@@ -37,7 +35,7 @@ def main():
     e_m_title = Label(tk, text="Base Case Algorithm", font=("Impact", 24), justify=LEFT)
     e_m_title.place(x=e_m.posX, y=e_m.posY-e_m.height-25)
     e_m_TOTAL_TIME = 0
-    e_m_REQUESTS = [[1], [9,2,3,11,1], [],[9],[9,2,3,2,1],[],[9,2,3,7,1],[],[],[5, 2],[],[]]
+    e_m_REQUESTS = [[11,0,1,0], [9,11,1,7,5], [],[10,7,11,11],[11,1,8],[1,3,6,10,6],[6,0,3,8],[11,11,8,7,9,0],[10,3,5,0,1],[3,3,4,7,8],[2,1,0,2,8],[1,2,0,5]]
     e_m_requests_left = 0
     for index in e_m_REQUESTS:
         e_m_requests_left += len(index)
@@ -49,7 +47,7 @@ def main():
     e_f_title = Label(tk, text="Improved Algorithm", font=("Impact", 24), justify=LEFT)
     e_f_title.place(x=e_f.posX, y=e_f.posY-e_f.height-25)
     e_f_TOTAL_TIME = 0
-    e_f_REQUESTS = [[1], [9,2,3,11,1], [],[9],[9,2,3,2,1],[],[9,2,3,7,1],[],[],[5, 2],[],[]]
+    e_f_REQUESTS = [[11,0,1,0], [9,11,1,7,5], [],[10,7,11,11],[11,1,8],[1,3,6,10,6],[6,0,3,8],[11,11,8,7,9,0],[10,3,5,0,1],[3,3,4,7,8],[2,1,0,2,8],[1,2,0,5]]
     e_f_requests_left = 0
     for index in e_f_REQUESTS:
         e_f_requests_left += len(index)
@@ -111,11 +109,14 @@ def main():
         if e_f_requests_left > 0:
             print("Lift is on floor", e_f.lift.current_floor)
             print("Requests left to service:", e_f_requests_left)
+            print(e_f_TOTAL_TIME)
             # Drop Passengers off at the floor they want
             if len(e_f.lift.passengers) > 0:
+                passenger_dropped_off = False
                 for passenger in e_f.lift.passengers:
                     print("Checking passenger",passenger)
                     if passenger == e_f.lift.current_floor:
+                        passenger_dropped_off = True
                         # print("Passenger eligible for the elevator!")
                         e_f.lift.removePassenger(passenger)
                         e_f_TOTAL_TIME += board_time
@@ -127,10 +128,11 @@ def main():
                 #Important for the algorithm to do the least steps to drop someone off
                 #Heading towards the furthest one away means it's likely to meet the others
                 # - on the way
-                if e_f.lift.capacity > 1:
+                if e_f.lift.capacity > 1 and passenger_dropped_off == True:
                     e_f.lift.passengers.sort(key=lambda x: abs(e_f.lift.current_floor-x))
                     e_f.lift.passengers.reverse()
                     print("Priority Sorting!")
+                    passenger_dropped_off = False
 
             # Board Passengers
             if len(e_f_REQUESTS[e_f.lift.current_floor]) > 0:
@@ -149,7 +151,7 @@ def main():
                     passengers = len(e_f_REQUESTS[index])
                     # Find the first floor that has passengers/requests
                     if index == e_f.lift.current_floor:
-                        e_f.lift.goTo(index+1)
+                        e_f.lift.goTo(index+2)
                         break
                     if passengers > 0 and index < e_f.storeys:
                         e_f.lift.goTo(index)
@@ -175,6 +177,9 @@ def main():
         else:
             win_f = Label(text="DONE IN "+str(e_f_TOTAL_TIME)+" seconds!")
             win_f.place(x=e_f.posX+200, y=e_f.posY)
+            print("----------------------------------")
+            print("Total time"+str(e_f_TOTAL_TIME))
+            print("----------------------------------")
 
         tk.update()
         time.sleep(.00000001)
