@@ -173,7 +173,7 @@ def main():
             win_f.place(x=e_f.posX+200, y=e_f.posY)
 
         tk.update()
-        time.sleep(.02)
+        time.sleep(.002)
 
 def drawRequests(tk: Tk, e: Elevator, requests_gen: list) -> None:
     '''
