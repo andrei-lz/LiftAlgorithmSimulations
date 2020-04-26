@@ -9,6 +9,7 @@ class Elevator:
     '''
     Represents a full elevator system object
     '''
+
     def __init__(self, storeys: int, posX: int, posY: int, canvas):
         self.storeys = storeys
         self.posX = posX
@@ -44,6 +45,7 @@ class Lift:
     '''
     Represents the lift part that moves up and down in an elevator shaft
     '''
+
     def __init__(self):
         self.capacity = 5
         self.current_floor = 0
@@ -56,7 +58,7 @@ class Lift:
     def removePassenger(self, passenger: int) -> None:
         self.passengers.remove(passenger)
         self.capacity += 1
-    
+
     def goTo(self, target: int):
         if target > self.current_floor:
             self.current_floor += 1
