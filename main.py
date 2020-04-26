@@ -37,7 +37,7 @@ def main():
     e_m_title = Label(tk, text="Base Case Algorithm", font=("Impact", 24), justify=LEFT)
     e_m_title.place(x=e_m.posX, y=e_m.posY-e_m.height-25)
     e_m_TOTAL_TIME = 0
-    e_m_REQUESTS = [[1], [9], [5, 2],[9,2,3,2,1],[9,2,3,2,1],[9,2,3,2,1],[9,2,3,2,1],[9,2,3,2,1],[],[],[],[]]
+    e_m_REQUESTS = [[1], [9], [5, 2],[9,2,3,2,1],[9,2,3,2,1],[],[9,2,3,2,1],[9,2,3,2,1],[],[],[],[]]
     e_m_requests_left = 0
     for index in e_m_REQUESTS:
         e_m_requests_left += len(index)
@@ -49,7 +49,7 @@ def main():
     e_f_title = Label(tk, text="Improved Algorithm", font=("Impact", 24), justify=LEFT)
     e_f_title.place(x=e_f.posX, y=e_f.posY-e_f.height-25)
     e_f_TOTAL_TIME = 0
-    e_f_REQUESTS = [[1], [9], [5, 2],[9,2,3,2,1],[9,2,3,2,1],[9,2,3,2,1],[9,2,3,2,1],[9,2,3,2,1],[],[],[],[]]
+    e_f_REQUESTS = [[1], [9], [5, 2],[9,2,3,2,1],[9,2,3,2,1],[],[9,2,3,2,1],[9,2,3,2,1],[],[],[],[]]
     e_f_requests_left = 0
     for index in e_f_REQUESTS:
         e_f_requests_left += len(index)
@@ -121,7 +121,7 @@ def main():
                         e_f_TOTAL_TIME += board_time
                         e_f_requests_left -= 1
                     else:
-                        print("Passenger NOT eligible for the elevator!")
+                        print("Passenger NOT eligible for the elevator, no room left!")
 
             # Board Passengers
             if len(e_f_REQUESTS[e_f.lift.current_floor]) > 0:
@@ -148,9 +148,11 @@ def main():
                 for index in range(0, len(e_f_REQUESTS[:])):
                     passengers = len(e_f_REQUESTS[index])
                     # Find the first floor that has passengers/requests
+                    if index == e_f.lift.current_floor:
+                        e_f.lift.goTo(index+1)
                     if passengers > 0 and index < e_f.storeys:
                         e_f.lift.goTo(index)
-                        print("Going to", index)
+                        # print("Going to", index)
             # Otherwise go for passenger destinations
             else:
                 #Sort the passenger requests in terms of proximity to the current floor
@@ -173,7 +175,7 @@ def main():
             win_f.place(x=e_f.posX+200, y=e_f.posY)
 
         tk.update()
-        time.sleep(.002)
+        time.sleep(.00000001)
 
 def drawRequests(tk: Tk, e: Elevator, requests_gen: list) -> None:
     '''
