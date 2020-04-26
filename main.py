@@ -37,7 +37,7 @@ def main():
     e_m_title = Label(tk, text="Base Case Algorithm", font=("Impact", 24), justify=LEFT)
     e_m_title.place(x=e_m.posX, y=e_m.posY-e_m.height-25)
     e_m_TOTAL_TIME = 0
-    e_m_REQUESTS = [[1], [9], [5, 2],[9,2,3,2,1],[9,2,3,2,1],[],[9,2,3,2,1],[9,2,3,2,1],[],[],[],[]]
+    e_m_REQUESTS = [[1], [9,2,3,11,1], [],[9],[9,2,3,2,1],[],[9,2,3,7,1],[],[],[5, 2],[],[]]
     e_m_requests_left = 0
     for index in e_m_REQUESTS:
         e_m_requests_left += len(index)
@@ -49,7 +49,7 @@ def main():
     e_f_title = Label(tk, text="Improved Algorithm", font=("Impact", 24), justify=LEFT)
     e_f_title.place(x=e_f.posX, y=e_f.posY-e_f.height-25)
     e_f_TOTAL_TIME = 0
-    e_f_REQUESTS = [[1], [9], [5, 2],[9,2,3,2,1],[9,2,3,2,1],[],[9,2,3,2,1],[9,2,3,2,1],[],[],[],[]]
+    e_f_REQUESTS = [[1], [9,2,3,11,1], [],[9],[9,2,3,2,1],[],[9,2,3,7,1],[],[],[5, 2],[],[]]
     e_f_requests_left = 0
     for index in e_f_REQUESTS:
         e_f_requests_left += len(index)
@@ -116,12 +116,21 @@ def main():
                 for passenger in e_f.lift.passengers:
                     print("Checking passenger",passenger)
                     if passenger == e_f.lift.current_floor:
-                        print("Passenger eligible for the elevator!")
+                        # print("Passenger eligible for the elevator!")
                         e_f.lift.removePassenger(passenger)
                         e_f_TOTAL_TIME += board_time
                         e_f_requests_left -= 1
                     else:
-                        print("Passenger NOT eligible for the elevator, no room left!")
+                        # print("Passenger NOT eligible for the elevator, no room left!")
+                        break
+                #Sort the passenger requests in terms of proximity to the current floor
+                #Important for the algorithm to do the least steps to drop someone off
+                #Heading towards the furthest one away means it's likely to meet the others
+                # - on the way
+                if e_f.lift.capacity > 1:
+                    e_f.lift.passengers.sort(key=lambda x: abs(e_f.lift.current_floor-x))
+                    e_f.lift.passengers.reverse()
+                    print("Priority Sorting!")
 
             # Board Passengers
             if len(e_f_REQUESTS[e_f.lift.current_floor]) > 0:
@@ -131,15 +140,6 @@ def main():
                         e_f.lift.addPassenger(passenger)
                         e_f_TOTAL_TIME += board_time
                         e_f_REQUESTS[e_f.lift.current_floor].remove(passenger)
-                #Sort the passenger requests in terms of proximity to the current floor
-                #Important for the algorithm to do the least steps to drop someone off
-                #Heading towards the furthest one away means it's likely to meet the others
-                # - on the way
-                if e_f.lift.capacity > 1:
-                    e_f.lift.passengers.sort(key=lambda x: abs(e_f.lift.current_floor-x))
-                    e_f.lift.passengers.reverse()
-                    print("Priority Sorting!")
-            
             
             # Move the elevator closer to the next destination
             # If the elevator is empty, go for requests
@@ -150,8 +150,10 @@ def main():
                     # Find the first floor that has passengers/requests
                     if index == e_f.lift.current_floor:
                         e_f.lift.goTo(index+1)
+                        break
                     if passengers > 0 and index < e_f.storeys:
                         e_f.lift.goTo(index)
+                        break
                         # print("Going to", index)
             # Otherwise go for passenger destinations
             else:
@@ -159,10 +161,10 @@ def main():
                 #Important for the algorithm to do the least steps to drop someone off
                 #Heading towards the furthest one away means it's likely to meet the others
                 # - on the way
-                if e_f.lift.capacity > 1:
-                    e_f.lift.passengers.sort(key=lambda x: abs(e_f.lift.current_floor-x))
-                    e_f.lift.passengers.reverse()
-                    print("Priority Sorting!")
+                # if e_f.lift.capacity > 1:
+                #     e_f.lift.passengers.sort(key=lambda x: abs(e_f.lift.current_floor-x))
+                #     e_f.lift.passengers.reverse()
+                #     print("Priority Sorting!")
                 print("Next destination:",e_f.lift.passengers[0])
                 print("Elevators has",5-e_f.lift.capacity,"people in it")
                 print(e_f.lift.passengers)
