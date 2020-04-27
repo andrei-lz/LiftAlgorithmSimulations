@@ -134,6 +134,8 @@ def main():
         else:
             win_f = Label(text="DONE IN " + str(e_m_TOTAL_TIME) + " seconds!")
             win_f.place(x=e_m.posX + 200, y=e_m.posY)
+            print("Export Data:")
+            print("Mechanical Elevator Time: "+str(e_m_TOTAL_TIME))
 
         ##
         # Free Elevator
@@ -205,6 +207,8 @@ def main():
         else:
             win_f = Label(text="DONE IN " + str(e_f_TOTAL_TIME) + " seconds!")
             win_f.place(x=e_f.posX + 200, y=e_f.posY)
+            print("Export Data:")
+            print("Free Elevator Time: "+str(e_f_TOTAL_TIME))
 
         tk.update()
         time.sleep(.00000001)
