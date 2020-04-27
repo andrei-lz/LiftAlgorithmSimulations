@@ -193,17 +193,9 @@ def main():
                         # print("Going to", index)
             # Otherwise go for passenger destinations
             else:
-                # Sort the passenger requests in terms of proximity to the current floor
-                # Important for the algorithm to do the least steps to drop someone off
-                # Heading towards the furthest one away means it's likely to meet the others
-                # - on the way
-                # if e_f.lift.capacity > 1:
-                #     e_f.lift.passengers.sort(key=lambda x: abs(e_f.lift.current_floor-x))
-                #     e_f.lift.passengers.reverse()
-                #     print("Priority Sorting!")
-                print("Next destination:", e_f.lift.passengers[0])
-                print("Elevators has", 5 - e_f.lift.capacity, "people in it")
-                print(e_f.lift.passengers)
+                # print("Next destination:", e_f.lift.passengers[0])
+                # print("Elevators has", 5 - e_f.lift.capacity, "people in it")
+                # print(e_f.lift.passengers)
                 e_f.lift.goTo(e_f.lift.passengers[0])
 
                 dropped_off_label = Label(
